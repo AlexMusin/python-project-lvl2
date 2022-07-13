@@ -6,4 +6,4 @@
 
 
 3rd step asciinema:
-https://asciinema.org/a/O7PNd8aoat5E9frWohSZnLXYj
+[![asciicast](https://asciinema.org/a/O7PNd8aoat5E9frWohSZnLXYj)](https://asciinema.org/a/O7PNd8aoat5E9frWohSZnLXYj)
