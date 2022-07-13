@@ -16,3 +16,6 @@ jobs:
       - name: Test with pytest
         run: |
           make pytest
+      - name: Test coverage
+        run: |
+          make test-coverage
