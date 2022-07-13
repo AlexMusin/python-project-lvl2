@@ -15,4 +15,4 @@ jobs:
       - run: make lint
       - name: Test with pytest
         run: |
-          pytest
+          make pytest
