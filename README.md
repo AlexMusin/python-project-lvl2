@@ -4,6 +4,9 @@
 ### Codeclimate maintainability status:
 [![Maintainability](https://api.codeclimate.com/v1/badges/96a074d3b1b64a420963/maintainability)](https://codeclimate.com/github/AlexMusin/python-project-lvl2/maintainability)
 
+### Codeclimate test coverage status:
+[![Test Coverage](https://api.codeclimate.com/v1/badges/96a074d3b1b64a420963/test_coverage)](https://codeclimate.com/github/AlexMusin/python-project-lvl2/test_coverage)
+
 
 3rd step asciinema:
 [![asciicast](https://asciinema.org/a/O7PNd8aoat5E9frWohSZnLXYj)](https://asciinema.org/a/O7PNd8aoat5E9frWohSZnLXYj)
