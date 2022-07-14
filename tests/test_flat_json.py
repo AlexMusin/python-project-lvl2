@@ -1,4 +1,5 @@
 import pytest
+import os
 from gendiff.scripts.gendiff import generate_diff
 
 
@@ -26,3 +27,13 @@ def test_both_empty_case():
             'tests/fixtures/flat_file2_empty.json',
             'tests/fixtures/flat_file2_empty.json'
             ) == '{\n}'
+
+def test_abs_path():
+    with open('tests/fixtures/flat_file_expected', 'r') as f:
+        expected = f.read()
+        file1_abs_path = os.path.abspath('tests/fixtures/flat_file1.json')
+        file2_abs_path = os.path.abspath('tests/fixtures/flat_file2.json')
+        assert generate_diff(
+            file1_abs_path,
+            file2_abs_path
+            ) == expected
