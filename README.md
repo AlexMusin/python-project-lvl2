@@ -8,5 +8,8 @@
 [![Test Coverage](https://api.codeclimate.com/v1/badges/96a074d3b1b64a420963/test_coverage)](https://codeclimate.com/github/AlexMusin/python-project-lvl2/test_coverage)
 
 
-3rd step asciinema:
-[![asciicast](https://asciinema.org/a/O7PNd8aoat5E9frWohSZnLXYj)](https://asciinema.org/a/O7PNd8aoat5E9frWohSZnLXYj)
+Flat JSON files comparison:
+[![asciicast](https://asciinema.org/a/O7PNd8aoat5E9frWohSZnLXYj.svg)](https://asciinema.org/a/O7PNd8aoat5E9frWohSZnLXYj)
+
+Flat YAML files comparison:
+[![asciicast](https://asciinema.org/a/IRPLAz1qxoN6woFG3r2fGAanj.svg)](https://asciinema.org/a/IRPLAz1qxoN6woFG3r2fGAanj)
