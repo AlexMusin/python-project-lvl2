@@ -1,5 +1,4 @@
 import argparse
-import json
 from os import path
 from gendiff.scripts import dumper
 from gendiff.scripts import parser as file_parser
