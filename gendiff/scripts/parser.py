@@ -1,14 +1,20 @@
 import json
 import yaml
-from yaml.loader import SafeLoader
+from os import path
 
 
-def parse(file_path, extention):
+EXTENTIONS_LIST = ['.json', '.yaml', '.yml']
+
+
+def parser(file_path):
+    '''Get file path
+    return parsed collection'''
+    extention = path.splitext(file_path)[1]
+    if extention not in EXTENTIONS_LIST:
+        raise Exception('Wrong file extention!')
     with open(file_path, 'r') as f:
-        if extention == '.json':
+        if extention == 'json':
             parsed = json.load(f)
-        if extention == '.yml' or extention == '.yaml':
-            parsed = yaml.load(f, Loader=SafeLoader)
-        if parsed is None:
-            parsed = {}
+        else:
+            parsed = yaml.load(f, Loader=yaml.SafeLoader)
     return parsed

@@ -1,5 +1,5 @@
-#import gendiff.scripts.parser as file_parser
-import parser as file_parser
+import gendiff.scripts.parser as file_parser
+#import parser as file_parser
 
 
 def input_files(file1_path, file2_path):
@@ -11,6 +11,7 @@ def input_files(file1_path, file2_path):
 
 def dict_diff(files):
     '''Return difference list'''
+    print('BOOM!')
     file1, file2 = files
     sorted_keys = sorted(list(set(
         list(file1.keys()) + list(file2.keys())
@@ -48,4 +49,4 @@ def make_diff(file1_path, file2_path):
     return dict_diff(input_files(file1_path, file2_path))
 
 
-print(make_diff('../../tests/fixtures/file1.json', '../../tests/fixtures/file2.json'))
+
