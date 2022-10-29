@@ -1,55 +1,14 @@
 import argparse
-from os import path
-from gendiff.scripts import dumper
-from gendiff.scripts import parser as file_parser
+from gendiff.scripts import diff_builder
+from gendiff.scripts import diff_out
 
 
 def generate_diff(first_file_path, second_file_path):
-    file1_extention = path.splitext(first_file_path)[1]
-    file2_extention = path.splitext(second_file_path)[1]
-    first_file = file_parser.parse(first_file_path, file1_extention)
-    second_file = file_parser.parse(second_file_path, file2_extention)
-    sorted_keys = sorted(list(set(list(first_file.keys())
-                                  + list(second_file.keys()))))
-    out_string = '{'
-    for key in sorted_keys:
-        if key in first_file and key in second_file:
-            if first_file[key] == second_file[key]:
-                out_string += (
-                    '\n    '
-                    + dumper.dump(key, file1_extention)
-                    + ': '
-                    + dumper.dump(first_file[key], file1_extention)
-                )
-            else:
-                out_string += (
-                    '\n  - '
-                    + dumper.dump(key, file1_extention)
-                    + ': '
-                    + dumper.dump(first_file[key], file1_extention)
-                )
-                out_string += (
-                    '\n  + '
-                    + dumper.dump(key, file1_extention)
-                    + ': '
-                    + dumper.dump(second_file[key], file2_extention)
-                )
-        elif key not in second_file:
-            out_string += (
-                '\n  - '
-                + dumper.dump(key, file1_extention)
-                + ': '
-                + dumper.dump(first_file[key], file1_extention)
-            )
-        elif key not in first_file:
-            out_string += (
-                '\n  + '
-                + dumper.dump(key, file1_extention)
-                + ': '
-                + dumper.dump(second_file[key], file2_extention)
-            )
-    out_string += '\n}'
-    return out_string
+    return diff_out._out(
+        diff_builder.make_diff(
+            first_file_path, second_file_path
+        )
+    )
 
 
 def main():

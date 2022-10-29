@@ -1,4 +1,3 @@
-import os
 from gendiff.scripts.gendiff import generate_diff
 
 def test_normal_case():
@@ -8,13 +7,6 @@ def test_normal_case():
             'tests/fixtures/file1.json',
             'tests/fixtures/file2.json'
             ) == expected
-        
-
-def test_both_empty_case():
-    assert generate_diff(
-            'tests/fixtures/flat_file2_empty.yml',
-            'tests/fixtures/flat_file2_empty.yml'
-            ) == '{\n}'
 
 
 def test_single_empty_case():

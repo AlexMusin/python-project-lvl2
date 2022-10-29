@@ -32,7 +32,7 @@ def get_new_value(inp_diff):
         raise Exception(
             '''This element was not changed.
             There is no new value!'''
-            )
+        )
     return inp_diff['values'][1]
 
 
@@ -41,12 +41,5 @@ def get_children(inp_diff):
         raise Exception(
             '''This element was not dict.
             There is no children!'''
-            )
+        )
     return inp_diff['children']
-
-
-
-
-
-
-

@@ -14,7 +14,7 @@ def parser(file_path):
         raise Exception('Wrong file extention!')
     with open(file_path, 'r') as f:
         if extention == 'json':
-            parsed = json.load(f)
+            parsed = json.loads(f)
         else:
-            parsed = yaml.load(f, Loader=yaml.SafeLoader)
+            parsed = yaml.load(f, Loader=yaml.SafeLoader) or {}
     return parsed
