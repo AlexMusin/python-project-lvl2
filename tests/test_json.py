@@ -5,7 +5,8 @@ def test_normal_case():
         expected = f.read()
         assert generate_diff(
             'tests/fixtures/file1.json',
-            'tests/fixtures/file2.json'
+            'tests/fixtures/file2.json',
+            'stylish',
             ) == expected
 
 
@@ -17,5 +18,6 @@ def test_single_empty_case():
         expected = f.read()        
         assert generate_diff(
             'tests/fixtures/file1.json',
-            'tests/fixtures/flat_file2_empty.json'
+            'tests/fixtures/flat_file2_empty.json',
+            'stylish',
             ) == expected

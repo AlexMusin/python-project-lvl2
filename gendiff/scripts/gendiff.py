@@ -3,11 +3,13 @@ from gendiff.scripts import diff_builder
 from gendiff.scripts import diff_out
 
 
-def generate_diff(first_file_path, second_file_path):
+def generate_diff(first_file_path, second_file_path, style):
     return diff_out._out(
         diff_builder.make_diff(
-            first_file_path, second_file_path
-        )
+            first_file_path,
+            second_file_path,
+        ),
+        style,
     )
 
 
@@ -18,10 +20,12 @@ def main():
     parser.add_argument('second_file_path')
     parser.add_argument(
         '-f', '--format',
-        dest='format',
+        type=str,
+        default='stylish',
         help='set format of output')
     args = parser.parse_args()
-    print(generate_diff(args.first_file_path, args.second_file_path))
+    style = args.style()
+    print(generate_diff(args.first_file_path, args.second_file_path, style))
 
 
 if __name__ == '__main__':

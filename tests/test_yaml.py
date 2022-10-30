@@ -5,5 +5,6 @@ def test_normal_case():
         expected = f.read()
         assert generate_diff(
             'tests/fixtures/file1.yml',
-            'tests/fixtures/file2.yml'
+            'tests/fixtures/file2.yml',
+            'stylish',
             ) == expected

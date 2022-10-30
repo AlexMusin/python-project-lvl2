@@ -2,7 +2,7 @@ import gendiff.scripts.diff_inner_representation as ig
 from gendiff.scripts.dumper import dump
 
 
-def _out(inp_diff, style='stylish', extention='.json'):
+def _out(inp_diff, style, extention='.json'):
     if style == 'stylish':
         replacer = '    '
     a = ['{']

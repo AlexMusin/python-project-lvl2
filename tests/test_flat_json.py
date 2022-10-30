@@ -7,7 +7,8 @@ def test_normal_case():
         expected = f.read()
         assert generate_diff(
             'tests/fixtures/flat_file1.json',
-            'tests/fixtures/flat_file2.json'
+            'tests/fixtures/flat_file2.json',
+            'stylish',
             ) == expected
 
 def test_single_empty_case():
@@ -18,13 +19,15 @@ def test_single_empty_case():
         expected = f.read()        
         assert generate_diff(
             'tests/fixtures/flat_file1.json',
-            'tests/fixtures/flat_file2_empty.json'
+            'tests/fixtures/flat_file2_empty.json',
+            'stylish',
             ) == expected
 
 def test_both_empty_case():
     assert generate_diff(
             'tests/fixtures/flat_file2_empty.json',
-            'tests/fixtures/flat_file2_empty.json'
+            'tests/fixtures/flat_file2_empty.json',
+            'stylish',
             ) == '{\n}'
 
 def test_abs_path():
@@ -34,5 +37,6 @@ def test_abs_path():
         file2_abs_path = os.path.abspath('tests/fixtures/flat_file2.json')
         assert generate_diff(
             file1_abs_path,
-            file2_abs_path
+            file2_abs_path,
+            'stylish',
             ) == expected
