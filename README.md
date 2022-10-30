@@ -8,6 +8,9 @@
 [![Test Coverage](https://api.codeclimate.com/v1/badges/96a074d3b1b64a420963/test_coverage)](https://codeclimate.com/github/AlexMusin/python-project-lvl2/test_coverage)
 
 
+Complex JSON files comparison:
+[![asciicast](https://asciinema.org/a/FXvrUJpmu9ZPng7UeawnlCZCM.svg)](https://asciinema.org/a/FXvrUJpmu9ZPng7UeawnlCZCM)
+
 Flat JSON files comparison:
 [![asciicast](https://asciinema.org/a/O7PNd8aoat5E9frWohSZnLXYj.svg)](https://asciinema.org/a/O7PNd8aoat5E9frWohSZnLXYj)
 

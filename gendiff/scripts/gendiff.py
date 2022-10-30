@@ -24,7 +24,7 @@ def main():
         default='stylish',
         help='set format of output')
     args = parser.parse_args()
-    style = args.style()
+    style = args.format
     print(generate_diff(args.first_file_path, args.second_file_path, style))
 
 
