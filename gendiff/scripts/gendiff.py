@@ -19,7 +19,6 @@ def generate_diff(first_file_path, second_file_path, style):
                 second_file_path,
             )
         )
-    
 
 
 def main():
