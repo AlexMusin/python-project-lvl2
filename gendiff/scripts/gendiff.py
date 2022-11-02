@@ -1,16 +1,25 @@
 import argparse
 from gendiff.scripts import diff_builder
-from gendiff.scripts import diff_out
+from gendiff.scripts import diff_out_plain
+from gendiff.scripts import diff_out_stylish
 
 
 def generate_diff(first_file_path, second_file_path, style):
-    return diff_out._out(
-        diff_builder.make_diff(
-            first_file_path,
-            second_file_path,
-        ),
-        style,
-    )
+    if style == 'stylish':
+        return diff_out_stylish.out_stylish(
+            diff_builder.make_diff(
+                first_file_path,
+                second_file_path,
+            )
+        )
+    if style == 'plain':
+        return diff_out_plain.out_plain(
+            diff_builder.make_diff(
+                first_file_path,
+                second_file_path,
+            )
+        )
+    
 
 
 def main():

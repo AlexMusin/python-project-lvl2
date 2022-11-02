@@ -2,7 +2,7 @@ import json
 import yaml
 
 
-def dump(word, extention):
+def dump(word, extention='.json'):
     if extention == '.json':
         dumped = json.dumps(word).strip('"')
     if extention == '.yml' or extention == '.yaml':

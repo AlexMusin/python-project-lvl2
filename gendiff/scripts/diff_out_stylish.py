@@ -2,9 +2,8 @@ import gendiff.scripts.diff_inner_representation as ig
 from gendiff.scripts.dumper import dump
 
 
-def _out(inp_diff, style, extention='.json'):
-    if style == 'stylish':
-        replacer = '    '
+def out_stylish(inp_diff, extention='.json'):
+    replacer = '    '
     a = ['{']
 
     def recourse(elem, depth=0):

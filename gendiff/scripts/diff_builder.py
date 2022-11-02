@@ -1,5 +1,5 @@
 import gendiff.scripts.parser as file_parser
-
+#import parser as file_parser
 
 def input_files(file1_path, file2_path):
     '''Return parsed files from input paths'''
