@@ -1,3 +1,15 @@
+Welcome to Difference Builder educational project.
+
+Project description:
+Difference Builder is a second Hexlet educational Python project.
+Purpose is to make a program that builds a difference of two input files.
+Input formats: JSON, YAML.
+Output is possible using three format styles: 'stylish', 'plain' and JSON (please see asciinema examples below).
+To install Difference Builder please use command: python3 -m pip install --user hexlet_code-0.1.0-py3-none-any.whl. Python (3.6 and newer) and actual pip pre-istalled are necessary.
+To launch Difference builder please type gendiff 'file1_path' 'file2_path'.
+Installation and use are shown in asciinema below/
+
+
 ### Hexlet tests and linter status:
 [![Actions Status](https://github.com/AlexMusin/python-project-lvl2/workflows/hexlet-check/badge.svg)](https://github.com/AlexMusin/python-project-lvl2/actions)
 
