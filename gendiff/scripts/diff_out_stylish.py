@@ -3,6 +3,7 @@ from gendiff.scripts.dumper import dump
 
 
 def out_stylish(inp_diff, extention='.json'):
+    '''Return stylish-formatted difference'''
     replacer = '    '
     a = ['{']
 
@@ -71,6 +72,9 @@ def out_stylish(inp_diff, extention='.json'):
 
 
 def single_value_build(inp_value, depth, replacer, extention):
+    '''Build output for single complex cases
+    i.e. when status is not modified and 
+    at least one of the values is complex'''
     out_list = []
     depth += 1
     if not isinstance(inp_value, dict):

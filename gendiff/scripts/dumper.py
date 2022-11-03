@@ -3,6 +3,8 @@ import yaml
 
 
 def dump(word, extention='.json'):
+    '''Return value converted JSON or YAML
+    regarding input extention'''
     if extention == '.json':
         dumped = json.dumps(word).strip('"')
     if extention == '.yml' or extention == '.yaml':

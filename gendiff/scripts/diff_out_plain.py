@@ -3,6 +3,7 @@ from gendiff.scripts.dumper import dump
 
 
 def out_plain(inp_diff):
+    '''Build plain-style output'''
     out_list = [
         f'Property {elem[0]} was {elem[1]}'
         for elem in prepare_list(inp_diff)
@@ -11,6 +12,7 @@ def out_plain(inp_diff):
 
 
 def prepare_list(inp_diff):
+    '''Make in-between list for difference output'''
     def recourse(item, path):
         status = ig.get_status(item)
         name = ig.get_name(item)
@@ -44,6 +46,7 @@ def prepare_list(inp_diff):
 
 
 def dump_values(value):
+    '''JSON-format calue dumper'''
     if not isinstance(value, dict):
         if isinstance(value, str):
             return f"'{dump(value)}'"
@@ -53,6 +56,7 @@ def dump_values(value):
 
 
 def flatten(inp_list):
+    '''Flatten list'''
     a = []
 
     def recourse(item):

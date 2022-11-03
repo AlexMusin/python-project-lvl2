@@ -13,6 +13,9 @@ Complex JSON files comparison ("stylish" output format):
 Complex JSON filer comparison ("plain" output format):
 [![asciicast](https://asciinema.org/a/1dM2RdXHM3vc23eXwUXXHAYEJ.svg)](https://asciinema.org/a/1dM2RdXHM3vc23eXwUXXHAYEJ)
 
+Complex JSON filer comparison (JSON output format):
+[![asciicast](https://asciinema.org/a/imIcDd5BfCbnCYJ2ou9F7K6lE.svg)](https://asciinema.org/a/imIcDd5BfCbnCYJ2ou9F7K6lE)
+
 Flat JSON files comparison:
 [![asciicast](https://asciinema.org/a/O7PNd8aoat5E9frWohSZnLXYj.svg)](https://asciinema.org/a/O7PNd8aoat5E9frWohSZnLXYj)
 

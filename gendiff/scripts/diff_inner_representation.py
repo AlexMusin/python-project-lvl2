@@ -1,8 +1,10 @@
 def get_name(inp_diff):
+    '''Return name'''
     return inp_diff['name']
 
 
 def get_status(inp_diff):
+    '''Return status'''
     return inp_diff['status']
 
 
@@ -16,6 +18,7 @@ def get_all_values(inp_diff):
 
 
 def get_init_value(inp_diff):
+    '''Return initial value'''
     if inp_diff['status'] == 'modified':
         raise Exception(
             '''Modified dictionaries have no values!'''
@@ -24,6 +27,7 @@ def get_init_value(inp_diff):
 
 
 def get_new_value(inp_diff):
+    '''Return new value'''
     if inp_diff['status'] == 'modified':
         raise Exception(
             '''Modified dictionaries have no values!'''
@@ -37,6 +41,7 @@ def get_new_value(inp_diff):
 
 
 def get_children(inp_diff):
+    '''Return children of modified element of input'''
     if inp_diff['status'] != 'modified':
         raise Exception(
             '''This element was not dict.
