@@ -8,6 +8,7 @@ SINGLE_STATUS_DICT = {
     'added': '+'
 }
 
+
 def out_stylish(inp_diff, extention='.json'):
     '''Return stylish-formatted difference'''
     replacer = '    '
@@ -106,7 +107,7 @@ def single_value_build(inp_value, depth, replacer, extention):
 
 
 def make_string(replacer, depth, name, operation, value):
-    return  (
+    return (
         f"{replacer * depth}  {operation} "
         f"{name}: "
         f"{value}"
