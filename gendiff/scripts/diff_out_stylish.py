@@ -2,6 +2,12 @@ import gendiff.scripts.diff_inner_representation as ig
 from gendiff.scripts.dumper import dump
 
 
+SINGLE_STATUS_DICT = {
+    'saved': ' ',
+    'deleted': '-',
+    'added': '+'
+}
+
 def out_stylish(inp_diff, extention='.json'):
     '''Return stylish-formatted difference'''
     replacer = '    '
@@ -9,15 +15,27 @@ def out_stylish(inp_diff, extention='.json'):
 
     def recourse(elem, depth=0):
         for item in elem:
-            single_status_list = ['saved', 'deleted', 'added']
-            if ig.get_status(item) in single_status_list:
+            name = ig.get_name(item)
+            status = ig.get_status(item)
+            if status in SINGLE_STATUS_DICT.keys():
+                operation = SINGLE_STATUS_DICT[status]
                 builded_value = single_value_build(
                     ig.get_all_values(item),
                     depth,
                     replacer,
                     extention,
                 )
-            if ig.get_status(item) == 'changed':
+                a.append(make_string(
+                    replacer,
+                    depth,
+                    name,
+                    operation,
+                    builded_value,
+                )
+                )
+            elif status == 'changed':
+                operation1 = SINGLE_STATUS_DICT['deleted']
+                operation2 = SINGLE_STATUS_DICT['added']
                 builded_init_value = single_value_build(
                     ig.get_init_value(item),
                     depth,
@@ -30,37 +48,24 @@ def out_stylish(inp_diff, extention='.json'):
                     replacer,
                     extention,
                 )
-            if ig.get_status(item) == 'saved':
-                a.append(
-                    f"{replacer * depth}    "
-                    f"{ig.get_name(item)}: "
-                    f"{builded_value}"
+                a.append(make_string(
+                    replacer,
+                    depth,
+                    name,
+                    operation1,
+                    builded_init_value,
                 )
-            if ig.get_status(item) == 'deleted':
-                a.append(
-                    f"{replacer * depth}  - "
-                    f"{ig.get_name(item)}: "
-                    f"{builded_value}"
                 )
-            elif ig.get_status(item) == 'added':
-                a.append(
-                    f"{replacer * depth}  + "
-                    f"{ig.get_name(item)}: "
-                    f"{builded_value}"
+                a.append(make_string(
+                    replacer,
+                    depth,
+                    name,
+                    operation2,
+                    builded_new_value,
                 )
-            elif ig.get_status(item) == 'changed':
-                a.append(
-                    f"{replacer * depth}  - "
-                    f"{ig.get_name(item)}: "
-                    f"{builded_init_value}"
                 )
-                a.append(
-                    f"{replacer * depth}  + "
-                    f"{ig.get_name(item)}: "
-                    f"{builded_new_value}"
-                )
-            elif ig.get_status(item) == 'modified':
-                a.append(f"{replacer * depth}    {ig.get_name(item)}: {{")
+            elif status == 'modified':
+                a.append(f"{replacer * depth}    {name}: {{")
                 depth += 1
                 recourse(ig.get_children(item), depth)
                 a.append(f"{replacer * depth}}}")
@@ -98,3 +103,11 @@ def single_value_build(inp_value, depth, replacer, extention):
         recourse(inp_value, depth)
         out_list.append(f"{replacer * depth}}}")
     return ('\n'.join(out_list))
+
+
+def make_string(replacer, depth, name, operation, value):
+    return  (
+        f"{replacer * depth}  {operation} "
+        f"{name}: "
+        f"{value}"
+    )
