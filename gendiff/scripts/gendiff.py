@@ -29,6 +29,7 @@ def generate_diff(first_file_path, second_file_path, format):
             )
         )
 
+
 def main():
     '''Launch generate_diff with input arguments'''
     parser = argparse.ArgumentParser(
