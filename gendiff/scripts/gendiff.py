@@ -14,7 +14,11 @@ def main():
     parser.add_argument('first_file_path')
     parser.add_argument('second_file_path')
     args = parser.parse_args()
-    print(generate_diff(args.first_file_path, args.second_file_path, args.format))
+    print(generate_diff(
+        args.first_file_path,
+        args.second_file_path,
+        args.format
+        ))
 
 
 if __name__ == '__main__':
