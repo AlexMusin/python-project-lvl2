@@ -36,7 +36,7 @@ def prepare_list(inp_diff):
                 )
             return (dump_values(path), statement)
         elif status == 'modified':
-            return(
+            return (
                 list(map(
                     lambda node: recourse(node, path),
                     ig.get_children(item)
