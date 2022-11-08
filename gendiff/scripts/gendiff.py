@@ -5,7 +5,7 @@ from gendiff.scripts import diff_out_stylish
 from gendiff.scripts import diff_out_json
 
 
-def generate_diff(first_file_path, second_file_path, format):
+def generate_diff(first_file_path, second_file_path, format='stylish'):
     '''Launch difference building and output with defined format'''
     if format == 'stylish':
         return diff_out_stylish.out_stylish(
