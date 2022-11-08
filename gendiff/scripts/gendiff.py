@@ -1,6 +1,7 @@
 import argparse
 from gendiff.diff_launcher import generate_diff
 
+
 def main():
     '''Launch diff launcher with input arguments'''
     parser = argparse.ArgumentParser(
