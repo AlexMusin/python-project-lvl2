@@ -1,11 +1,4 @@
-import gendiff.scripts.parser as file_parser
-
-
-def input_files(file1_path, file2_path):
-    '''Return parsed files from input paths'''
-    file1 = file_parser.parser(file1_path)
-    file2 = file_parser.parser(file2_path)
-    return (file1, file2)
+#from gendiff.scripts file_input import input_files
 
 
 def dict_diff(files):
@@ -43,5 +36,5 @@ def dict_diff(files):
     return list(map(key_diff, sorted_keys))
 
 
-def make_diff(file1_path, file2_path):
-    return dict_diff(input_files(file1_path, file2_path))
+#def make_diff(file1_path, file2_path):
+#    return dict_diff(input_files(file1_path, file2_path))
