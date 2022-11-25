@@ -17,8 +17,8 @@ def main():
     print(generate_diff(
         args.first_file_path,
         args.second_file_path,
-        args.format
-        ))
+        args.format,
+    ))
 
 
 if __name__ == '__main__':

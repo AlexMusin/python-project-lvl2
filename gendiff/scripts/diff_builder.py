@@ -1,6 +1,3 @@
-#from gendiff.scripts file_input import input_files
-
-
 def dict_diff(files):
     '''Return difference list'''
     file1, file2 = files
@@ -34,7 +31,3 @@ def dict_diff(files):
                     diff_node['children'] = dict_diff((file1[key], file2[key]))
         return diff_node
     return list(map(key_diff, sorted_keys))
-
-
-#def make_diff(file1_path, file2_path):
-#    return dict_diff(input_files(file1_path, file2_path))

@@ -12,9 +12,10 @@ FORMAT_LIST = [
 
 
 def generate_diff(first_file_path, second_file_path, format):
-    '''Launch difference building and output with defined format'''
+    '''Check format.
+    Launch difference building and output with defined format'''
     if format not in FORMAT_LIST:
-        print('''User defined format is not available. 
+        print('''User defined format is not available.
         Format switched to "stylish"''')
         format = 'stylish'
     files = read_files(first_file_path, second_file_path)
