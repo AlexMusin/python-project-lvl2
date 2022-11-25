@@ -13,7 +13,7 @@ FORMAT_LIST = [
 
 def generate_diff(first_file_path, second_file_path, format):
     '''Check format.
-    Launch difference building and output with defined format'''
+    Launch difference building and output it with defined formater'''
     if format not in FORMAT_LIST:
         print('''User defined format is not available.
         Format switched to "stylish"''')
