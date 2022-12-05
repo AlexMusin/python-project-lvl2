@@ -1,5 +1,5 @@
-import gendiff.scripts.diff_inner_representation as ig
-from gendiff.scripts.dumper import dump
+import gendiff.diff_inner_representation as ig
+from gendiff.dumper import dump
 
 
 def out_plain(inp_diff):

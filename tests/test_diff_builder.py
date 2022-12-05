@@ -1,6 +1,6 @@
-from gendiff.scripts.diff_builder import dict_diff
-from gendiff.scripts.files_parser import parse_files
-from gendiff.scripts.files_input import read_files
+from gendiff.diff_builder import dict_diff
+from gendiff.files_parser import parse_files
+from gendiff.files_input import read_files
 
 
 def test_normal_case():

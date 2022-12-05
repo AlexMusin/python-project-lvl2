@@ -1,4 +1,4 @@
-from gendiff.diff_launcher import generate_diff
+from gendiff.diff_generator import generate_diff
 
 
 def test_normal_case():
