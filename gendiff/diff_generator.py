@@ -39,7 +39,7 @@ def cli():
         print('''User defined format is not available.
         Format switched to "stylish"''')
         format = 'stylish'
-    generate_diff(first_file_path, second_file_path, format)
+    return generate_diff(first_file_path, second_file_path, format)
 
 
 def main():
