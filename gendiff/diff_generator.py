@@ -12,7 +12,7 @@ FORMAT_LIST = [
 ]
 
 
-def generate_diff(first_file_path, second_file_path, format):
+def generate_diff(first_file_path, second_file_path, format='stylish'):
     files = read_files(first_file_path, second_file_path)
     parsed_files = parse_files(files)
     difference = diff_builder.dict_diff(parsed_files)
