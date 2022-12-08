@@ -5,11 +5,11 @@ from gendiff.files_parser import parse_files
 from gendiff.diff_out import diff_output
 
 
-FORMAT_LIST = [
+FORMAT_TUP = (
     'stylish',
     'plain',
     'json',
-]
+)
 
 
 def generate_diff(first_file_path, second_file_path, format='stylish'):
@@ -21,7 +21,7 @@ def generate_diff(first_file_path, second_file_path, format='stylish'):
 
 
 def cli():
-    '''Launch difference building and output it with defined formater'''
+    '''Launch difference building and return it with defined formater'''
     parser = argparse.ArgumentParser(
         description='Compares two configuration files and shows a difference.')
     parser.add_argument(
@@ -35,7 +35,7 @@ def cli():
     format = args.format
     first_file_path = args.first_file_path
     second_file_path = args.second_file_path
-    if format not in FORMAT_LIST:
+    if format not in FORMAT_TUP:
         print('''User defined format is not available.
         Format switched to "stylish"''')
         format = 'stylish'
