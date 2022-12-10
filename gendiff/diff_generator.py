@@ -41,10 +41,3 @@ def cli():
         format = 'stylish'
     return generate_diff(first_file_path, second_file_path, format)
 
-
-def main():
-    cli()
-
-
-if __name__ == '__main__':
-    main()
