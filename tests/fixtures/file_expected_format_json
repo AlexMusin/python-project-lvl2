@@ -1,26 +1,26 @@
 [
   {
     "name": "common",
-    "status": "modified",
+    "node_type": "modified",
     "children": [
       {
         "name": "follow",
-        "status": "added",
+        "node_type": "added",
         "values": false
       },
       {
         "name": "setting1",
-        "status": "saved",
+        "node_type": "saved",
         "values": "Value 1"
       },
       {
         "name": "setting2",
-        "status": "deleted",
+        "node_type": "deleted",
         "values": 200
       },
       {
         "name": "setting3",
-        "status": "changed",
+        "node_type": "changed",
         "values": [
           true,
           null
@@ -28,27 +28,27 @@
       },
       {
         "name": "setting4",
-        "status": "added",
+        "node_type": "added",
         "values": "blah blah"
       },
       {
         "name": "setting5",
-        "status": "added",
+        "node_type": "added",
         "values": {
           "key5": "value5"
         }
       },
       {
         "name": "setting6",
-        "status": "modified",
+        "node_type": "modified",
         "children": [
           {
             "name": "doge",
-            "status": "modified",
+            "node_type": "modified",
             "children": [
               {
                 "name": "wow",
-                "status": "changed",
+                "node_type": "changed",
                 "values": [
                   "",
                   "so much"
@@ -58,12 +58,12 @@
           },
           {
             "name": "key",
-            "status": "saved",
+            "node_type": "saved",
             "values": "value"
           },
           {
             "name": "ops",
-            "status": "added",
+            "node_type": "added",
             "values": "vops"
           }
         ]
@@ -72,11 +72,11 @@
   },
   {
     "name": "group1",
-    "status": "modified",
+    "node_type": "modified",
     "children": [
       {
         "name": "baz",
-        "status": "changed",
+        "node_type": "changed",
         "values": [
           "bas",
           "bars"
@@ -84,12 +84,12 @@
       },
       {
         "name": "foo",
-        "status": "saved",
+        "node_type": "saved",
         "values": "bar"
       },
       {
         "name": "nest",
-        "status": "changed",
+        "node_type": "changed",
         "values": [
           {
             "key": "value"
@@ -101,7 +101,7 @@
   },
   {
     "name": "group2",
-    "status": "deleted",
+    "node_type": "deleted",
     "values": {
       "abc": 12345,
       "deep": {
@@ -111,7 +111,7 @@
   },
   {
     "name": "group3",
-    "status": "added",
+    "node_type": "added",
     "values": {
       "deep": {
         "id": {
