@@ -14,28 +14,28 @@ def out_plain(inp_diff):
 def prepare_list(inp_diff):
     '''Make in-between list for difference output'''
     def recourse(item, path):
-        status = ig.get_status(item)
+        node_type = ig.get_node_type(item)
         name = ig.get_name(item)
         path = ('.'.join([path, name])).strip('.')
         statement = []
-        if status == 'saved':
+        if node_type == 'saved':
             return []
-        if status != 'modified':
-            if status == 'deleted':
+        if node_type != 'modified':
+            if node_type == 'deleted':
                 statement = 'removed'
-            if status == 'added':
+            if node_type == 'added':
                 statement = (
                     f'added with value: '
                     f'{dump_values(ig.get_all_values(item))}'
                 )
-            if status == 'changed':
+            if node_type == 'changed':
                 statement = (
                     f'updated. From '
                     f'{dump_values(ig.get_init_value(item))} '
                     f'to {dump_values(ig.get_new_value(item))}'
                 )
             return (dump_values(path), statement)
-        elif status == 'modified':
+        elif node_type == 'modified':
             return (
                 list(map(
                     lambda node: recourse(node, path),

@@ -2,7 +2,7 @@ import gendiff.diff_inner_representation as ig
 from gendiff.dumper import dump
 
 
-SINGLE_STATUS_DICT = {
+SINGLE_NODE_TYPE_DICT = {
     'saved': ' ',
     'deleted': '-',
     'added': '+'
@@ -17,9 +17,9 @@ def out_stylish(inp_diff, extention='.json'):
     def recourse(elem, depth=0):
         for item in elem:
             name = ig.get_name(item)
-            status = ig.get_status(item)
-            if status in SINGLE_STATUS_DICT.keys():
-                operation = SINGLE_STATUS_DICT[status]
+            node_type = ig.get_node_type(item)
+            if node_type in SINGLE_NODE_TYPE_DICT.keys():
+                operation = SINGLE_NODE_TYPE_DICT[node_type]
                 builded_value = single_value_build(
                     ig.get_all_values(item),
                     depth,
@@ -34,9 +34,9 @@ def out_stylish(inp_diff, extention='.json'):
                     builded_value,
                 )
                 )
-            elif status == 'changed':
-                operation1 = SINGLE_STATUS_DICT['deleted']
-                operation2 = SINGLE_STATUS_DICT['added']
+            elif node_type == 'changed':
+                operation1 = SINGLE_NODE_TYPE_DICT['deleted']
+                operation2 = SINGLE_NODE_TYPE_DICT['added']
                 builded_init_value = single_value_build(
                     ig.get_init_value(item),
                     depth,
@@ -65,7 +65,7 @@ def out_stylish(inp_diff, extention='.json'):
                     builded_new_value,
                 )
                 )
-            elif status == 'modified':
+            elif node_type == 'modified':
                 a.append(f"{replacer * depth}    {name}: {{")
                 depth += 1
                 recourse(ig.get_children(item), depth)
@@ -79,7 +79,7 @@ def out_stylish(inp_diff, extention='.json'):
 
 def single_value_build(inp_value, depth, replacer, extention):
     '''Build output for single complex cases
-    i.e. when status is not modified and
+    i.e. when node_type is not modified and
     at least one of the values is complex'''
     out_list = []
     depth += 1
