@@ -1,5 +1,6 @@
 import gendiff.diff_inner_representation as ig
 from gendiff.dumper import dump
+from gendiff import node_type
 
 
 def out_plain(inp_diff):
@@ -13,29 +14,31 @@ def out_plain(inp_diff):
 
 def prepare_list(inp_diff):
     '''Make in-between list for difference output'''
+    node_types = node_type.type()
+
     def recourse(item, path):
         node_type = ig.get_node_type(item)
         name = ig.get_name(item)
         path = ('.'.join([path, name])).strip('.')
         statement = []
-        if node_type == 'saved':
+        if node_type == node_types['saved']:
             return []
-        if node_type != 'modified':
-            if node_type == 'deleted':
+        if node_type != node_types['nested']:
+            if node_type == node_types['deleted']:
                 statement = 'removed'
-            if node_type == 'added':
+            if node_type == node_types['added']:
                 statement = (
                     f'added with value: '
                     f'{dump_values(ig.get_all_values(item))}'
                 )
-            if node_type == 'changed':
+            if node_type == node_types['changed']:
                 statement = (
                     f'updated. From '
                     f'{dump_values(ig.get_init_value(item))} '
                     f'to {dump_values(ig.get_new_value(item))}'
                 )
             return (dump_values(path), statement)
-        elif node_type == 'modified':
+        elif node_type == node_types['nested']:
             return (
                 list(map(
                     lambda node: recourse(node, path),
@@ -46,7 +49,7 @@ def prepare_list(inp_diff):
 
 
 def dump_values(value):
-    '''JSON-format calue dumper'''
+    '''JSON-format value dumper'''
     if not isinstance(value, dict):
         if isinstance(value, str):
             return f"'{dump(value)}'"

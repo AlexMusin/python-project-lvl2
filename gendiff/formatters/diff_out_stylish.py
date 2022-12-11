@@ -1,5 +1,6 @@
 import gendiff.diff_inner_representation as ig
 from gendiff.dumper import dump
+from gendiff import node_type as nt
 
 
 SINGLE_NODE_TYPE_DICT = {
@@ -13,6 +14,7 @@ def out_stylish(inp_diff, extention='.json'):
     '''Return stylish-formatted difference'''
     replacer = '    '
     a = ['{']
+    node_types = nt.type()
 
     def recourse(elem, depth=0):
         for item in elem:
@@ -34,7 +36,7 @@ def out_stylish(inp_diff, extention='.json'):
                     builded_value,
                 )
                 )
-            elif node_type == 'changed':
+            elif node_type == node_types['changed']:
                 operation1 = SINGLE_NODE_TYPE_DICT['deleted']
                 operation2 = SINGLE_NODE_TYPE_DICT['added']
                 builded_init_value = single_value_build(
@@ -65,7 +67,7 @@ def out_stylish(inp_diff, extention='.json'):
                     builded_new_value,
                 )
                 )
-            elif node_type == 'modified':
+            elif node_type == node_types['nested']:
                 a.append(f"{replacer * depth}    {name}: {{")
                 depth += 1
                 recourse(ig.get_children(item), depth)

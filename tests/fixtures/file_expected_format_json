@@ -1,7 +1,7 @@
 [
   {
     "name": "common",
-    "node_type": "modified",
+    "node_type": "nested",
     "children": [
       {
         "name": "follow",
@@ -40,11 +40,11 @@
       },
       {
         "name": "setting6",
-        "node_type": "modified",
+        "node_type": "nested",
         "children": [
           {
             "name": "doge",
-            "node_type": "modified",
+            "node_type": "nested",
             "children": [
               {
                 "name": "wow",
@@ -72,7 +72,7 @@
   },
   {
     "name": "group1",
-    "node_type": "modified",
+    "node_type": "nested",
     "children": [
       {
         "name": "baz",
