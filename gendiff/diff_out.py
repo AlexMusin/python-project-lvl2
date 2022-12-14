@@ -10,5 +10,20 @@ FORMAT_STYLES = {
 }
 
 
+def validate_format(format):
+    if format not in FORMAT_STYLES.keys():
+        raise Exception(
+            '''
+            Entered format is not valid
+            Please choose one of formats below:
+            - stylish
+            - plain
+            - json
+            Default: stylish
+            '''
+        )
+
+
 def diff_output(diff, format):
+    validate_format(format)
     return FORMAT_STYLES[format](diff)
