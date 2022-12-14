@@ -12,8 +12,10 @@ FORMAT_TUP = (
 
 
 def generate_diff(first_file_path, second_file_path, format='stylish'):
-    files = map(read_file, (first_file_path, second_file_path))
-    parsed_collections = map(parse_file, files)
-    difference = diff_builder.dict_diff(parsed_collections)
+    file1_tup = read_file(first_file_path)
+    file2_tup = read_file(second_file_path)
+    dict1 = parse_file(file1_tup)
+    dict2 = parse_file(file2_tup)
+    difference = diff_builder.dict_diff(dict1, dict2)
     diff_out = diff_output(difference, format)
     return diff_out
