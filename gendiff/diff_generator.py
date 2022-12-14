@@ -16,6 +16,6 @@ def generate_diff(first_file_path, second_file_path, format='stylish'):
     text2, format2 = read_file(second_file_path)
     dict1 = parse_file(text1, format1)
     dict2 = parse_file(text2, format2)
-    difference = diff_builder.dict_diff(dict1, dict2 )
+    difference = diff_builder.dict_diff(dict1, dict2)
     diff_out = diff_output(difference, format)
     return diff_out
