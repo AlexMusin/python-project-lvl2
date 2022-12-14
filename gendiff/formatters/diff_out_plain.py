@@ -3,7 +3,7 @@ from gendiff.dumper import dump
 from gendiff import node_type
 
 
-def out_plain(inp_diff):
+def out(inp_diff):
     '''Build plain-style output'''
     out_list = [
         f'Property {elem[0]} was {elem[1]}'

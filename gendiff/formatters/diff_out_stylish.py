@@ -10,7 +10,7 @@ SINGLE_NODE_TYPE_DICT = {
 }
 
 
-def out_stylish(inp_diff, extention='.json'):
+def out(inp_diff, extention='.json'):
     '''Return stylish-formatted difference'''
     replacer = '    '
     a = ['{']
