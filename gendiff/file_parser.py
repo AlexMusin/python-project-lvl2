@@ -2,10 +2,9 @@ import json
 import yaml
 
 
-def parse_file(file_tup):
+def parse_file(text, format):
     '''Get file
     return parsed collection'''
-    text, format = file_tup
     if format == 'json':
         parsed = json.loads(text)
     else:
