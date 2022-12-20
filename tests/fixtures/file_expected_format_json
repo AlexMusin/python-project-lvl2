@@ -9,21 +9,43 @@
         "values": false
       },
       {
-        "name": "setting1",
-        "node_type": "saved",
-        "values": "Value 1"
-      },
-      {
         "name": "setting2",
         "node_type": "deleted",
         "values": 200
       },
       {
-        "name": "setting3",
-        "node_type": "changed",
-        "values": [
-          true,
-          null
+        "name": "setting1",
+        "node_type": "saved",
+        "values": "Value 1"
+      },
+      {
+        "name": "setting6",
+        "node_type": "nested",
+        "children": [
+          {
+            "name": "key",
+            "node_type": "saved",
+            "values": "value"
+          },
+          {
+            "name": "ops",
+            "node_type": "added",
+            "values": "vops"
+          },
+          {
+            "name": "doge",
+            "node_type": "nested",
+            "children": [
+              {
+                "name": "wow",
+                "node_type": "changed",
+                "values": [
+                  "",
+                  "so much"
+                ]
+              }
+            ]
+          }
         ]
       },
       {
@@ -39,33 +61,11 @@
         }
       },
       {
-        "name": "setting6",
-        "node_type": "nested",
-        "children": [
-          {
-            "name": "doge",
-            "node_type": "nested",
-            "children": [
-              {
-                "name": "wow",
-                "node_type": "changed",
-                "values": [
-                  "",
-                  "so much"
-                ]
-              }
-            ]
-          },
-          {
-            "name": "key",
-            "node_type": "saved",
-            "values": "value"
-          },
-          {
-            "name": "ops",
-            "node_type": "added",
-            "values": "vops"
-          }
+        "name": "setting3",
+        "node_type": "changed",
+        "values": [
+          true,
+          null
         ]
       }
     ]
@@ -75,11 +75,13 @@
     "node_type": "nested",
     "children": [
       {
-        "name": "baz",
+        "name": "nest",
         "node_type": "changed",
         "values": [
-          "bas",
-          "bars"
+          {
+            "key": "value"
+          },
+          "str"
         ]
       },
       {
@@ -88,13 +90,11 @@
         "values": "bar"
       },
       {
-        "name": "nest",
+        "name": "baz",
         "node_type": "changed",
         "values": [
-          {
-            "key": "value"
-          },
-          "str"
+          "bas",
+          "bars"
         ]
       }
     ]

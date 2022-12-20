@@ -8,16 +8,17 @@ SINGLE_NODE_TYPE_DICT = {
     'deleted': '-',
     'added': '+'
 }
+REPLACER = '    '
 
 
 def out(inp_diff, extention='.json'):
     '''Return stylish-formatted difference'''
-    replacer = '    '
     a = ['{']
     node_types = nt.type()
 
     def recourse(elem, depth=0):
-        for item in elem:
+        sorted_elem = sorted(elem, key=lambda k: k['name'])
+        for item in sorted_elem:
             name = ig.get_name(item)
             node_type = ig.get_node_type(item)
             if node_type in SINGLE_NODE_TYPE_DICT.keys():
@@ -25,11 +26,11 @@ def out(inp_diff, extention='.json'):
                 builded_value = single_value_build(
                     ig.get_all_values(item),
                     depth,
-                    replacer,
+                    REPLACER,
                     extention,
                 )
                 a.append(make_string(
-                    replacer,
+                    REPLACER,
                     depth,
                     name,
                     operation,
@@ -42,17 +43,17 @@ def out(inp_diff, extention='.json'):
                 builded_init_value = single_value_build(
                     ig.get_init_value(item),
                     depth,
-                    replacer,
+                    REPLACER,
                     extention,
                 )
                 builded_new_value = single_value_build(
                     ig.get_new_value(item),
                     depth,
-                    replacer,
+                    REPLACER,
                     extention,
                 )
                 a.append(make_string(
-                    replacer,
+                    REPLACER,
                     depth,
                     name,
                     operation1,
@@ -60,7 +61,7 @@ def out(inp_diff, extention='.json'):
                 )
                 )
                 a.append(make_string(
-                    replacer,
+                    REPLACER,
                     depth,
                     name,
                     operation2,
@@ -68,10 +69,10 @@ def out(inp_diff, extention='.json'):
                 )
                 )
             elif node_type == node_types['nested']:
-                a.append(f"{replacer * depth}    {name}: {{")
+                a.append(f"{REPLACER * depth}    {name}: {{")
                 depth += 1
                 recourse(ig.get_children(item), depth)
-                a.append(f"{replacer * depth}}}")
+                a.append(f"{REPLACER * depth}}}")
                 depth -= 1
     recourse(inp_diff)
     a.append('}')
@@ -79,9 +80,9 @@ def out(inp_diff, extention='.json'):
     return out_string
 
 
-def single_value_build(inp_value, depth, replacer, extention):
+def single_value_build(inp_value, depth, REPLACER, extention):
     '''Build output for single complex cases
-    i.e. when node_type is not modified and
+    i.e. when node_type is not nested and
     at least one of the values is complex'''
     out_list = []
     depth += 1
@@ -91,26 +92,26 @@ def single_value_build(inp_value, depth, replacer, extention):
         out_list.append('{')
 
         def recourse(elem, depth):
-            for item in elem:
+            for item in sorted(elem.keys()):
                 if not isinstance(elem[item], dict):
                     out_list.append(
-                        f"{replacer * depth}    "
+                        f"{REPLACER * depth}    "
                         f"{item}: {dump(elem[item], extention)}"
                     )
                 else:
-                    out_list.append(f"{replacer * depth}    {item}: {{")
+                    out_list.append(f"{REPLACER * depth}    {item}: {{")
                     depth += 1
                     recourse(elem[item], depth)
-                    out_list.append(f"{replacer * depth}}}")
+                    out_list.append(f"{REPLACER * depth}}}")
                     depth -= 1
         recourse(inp_value, depth)
-        out_list.append(f"{replacer * depth}}}")
+        out_list.append(f"{REPLACER * depth}}}")
     return ('\n'.join(out_list))
 
 
-def make_string(replacer, depth, name, operation, value):
+def make_string(REPLACER, depth, name, operation, value):
     return (
-        f"{replacer * depth}  {operation} "
+        f"{REPLACER * depth}  {operation} "
         f"{name}: "
         f"{value}"
     )

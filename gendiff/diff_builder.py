@@ -4,9 +4,9 @@ from gendiff import node_type
 def dict_diff(dict1, dict2):
     '''Return difference list'''
     node_types = node_type.type()
-    sorted_keys = sorted(list(set(
+    keys_set = list(set(
         list(dict1.keys()) + list(dict2.keys())
-    )))
+    ))
 
     def key_diff(key):
         diff_node = {}
@@ -33,4 +33,4 @@ def dict_diff(dict1, dict2):
                     diff_node['node_type'] = node_types['nested']
                     diff_node['children'] = dict_diff(dict1[key], dict2[key])
         return diff_node
-    return list(map(key_diff, sorted_keys))
+    return list(map(key_diff, keys_set))

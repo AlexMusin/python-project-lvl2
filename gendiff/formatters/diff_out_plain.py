@@ -45,7 +45,7 @@ def prepare_list(inp_diff):
                     ig.get_children(item)
                 ))
             )
-    return flatten(list(map(lambda x: recourse(x, path=''), inp_diff)))
+    return sorted(flatten(list(map(lambda x: recourse(x, path=''), inp_diff))))
 
 
 def dump_values(value):
