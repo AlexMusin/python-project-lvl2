@@ -2,6 +2,7 @@ from gendiff.diff_builder import dict_diff
 from gendiff.file_parser import parse_file
 from gendiff.file_reader import read_file
 
+
 def test_normal_case():
     with open('tests/fixtures/file_expected_diff_normal.txt') as f:
         expected = f.read()

@@ -14,6 +14,7 @@ def test_normal_case():
         expected = sort_diff(json.loads(expected))
         assert diff == expected
 
+
 def sort_diff(diff):
     diff.sort(key=lambda k: k['name'])
     for elem in diff:
