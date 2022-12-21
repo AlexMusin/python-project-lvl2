@@ -1,6 +1,5 @@
 import gendiff.diff_inner_representation as ig
 from gendiff.dumper import dump
-from gendiff import node_type as nt
 
 
 SINGLE_NODE_TYPE_DICT = {
@@ -9,15 +8,20 @@ SINGLE_NODE_TYPE_DICT = {
     'added': '+'
 }
 REPLACER = '    '
+NESTED = 'nested'
+SAVED = 'saved'
+DELETED = 'deleted'
+ADDED = 'added'
+CHANGED = 'changed'
+NAME = 'name'
 
 
 def out(inp_diff, extention='.json'):
     '''Return stylish-formatted difference'''
     a = ['{']
-    node_types = nt.type()
 
     def recourse(elem, depth=0):
-        sorted_elem = sorted(elem, key=lambda k: k['name'])
+        sorted_elem = sorted(elem, key=lambda k: k[NAME])
         for item in sorted_elem:
             name = ig.get_name(item)
             node_type = ig.get_node_type(item)
@@ -37,9 +41,9 @@ def out(inp_diff, extention='.json'):
                     builded_value,
                 )
                 )
-            elif node_type == node_types['changed']:
-                operation1 = SINGLE_NODE_TYPE_DICT['deleted']
-                operation2 = SINGLE_NODE_TYPE_DICT['added']
+            elif node_type == CHANGED:
+                operation1 = SINGLE_NODE_TYPE_DICT[DELETED]
+                operation2 = SINGLE_NODE_TYPE_DICT[ADDED]
                 builded_init_value = single_value_build(
                     ig.get_init_value(item),
                     depth,
@@ -68,7 +72,7 @@ def out(inp_diff, extention='.json'):
                     builded_new_value,
                 )
                 )
-            elif node_type == node_types['nested']:
+            elif node_type == NESTED:
                 a.append(f"{REPLACER * depth}    {name}: {{")
                 depth += 1
                 recourse(ig.get_children(item), depth)

@@ -3,15 +3,19 @@ from gendiff.formatters.diff_out_stylish import out as stylish
 from gendiff.formatters.diff_out_json import out as json
 
 
-FORMAT_STYLES = {
-    'stylish': stylish,
-    'plain': plain,
-    'json': json,
-}
+FORMAT_STYLES = [
+    'stylish',
+    'plain',
+    'json',
+]
+
+STYLISH = FORMAT_STYLES[0]
+PLAIN = FORMAT_STYLES[1]
+JSON = FORMAT_STYLES[2]
 
 
 def validate_format(format):
-    if format not in FORMAT_STYLES.keys():
+    if format not in FORMAT_STYLES:
         raise Exception(
             '''
             Entered format is not valid
@@ -26,4 +30,9 @@ def validate_format(format):
 
 def diff_output(diff, format):
     validate_format(format)
-    return FORMAT_STYLES[format](diff)
+    if format == STYLISH:
+        return stylish(diff)
+    if format == PLAIN:
+        return plain(diff)
+    if format == JSON:
+        return json(diff)

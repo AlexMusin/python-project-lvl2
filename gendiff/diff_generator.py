@@ -4,13 +4,6 @@ from gendiff.file_parser import parse_file
 from gendiff.diff_out import diff_output
 
 
-FORMAT_TUP = (
-    'stylish',
-    'plain',
-    'json',
-)
-
-
 def generate_diff(first_file_path, second_file_path, format='stylish'):
     text1, format1 = read_file(first_file_path)
     text2, format2 = read_file(second_file_path)

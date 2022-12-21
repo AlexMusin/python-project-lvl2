@@ -1,6 +1,12 @@
 import gendiff.diff_inner_representation as ig
 from gendiff.dumper import dump
-from gendiff import node_type
+
+
+NESTED = 'nested'
+SAVED = 'saved'
+DELETED = 'deleted'
+ADDED = 'added'
+CHANGED = 'changed'
 
 
 def out(inp_diff):
@@ -14,31 +20,30 @@ def out(inp_diff):
 
 def prepare_list(inp_diff):
     '''Make in-between list for difference output'''
-    node_types = node_type.type()
 
     def recourse(item, path):
         node_type = ig.get_node_type(item)
         name = ig.get_name(item)
         path = ('.'.join([path, name])).strip('.')
         statement = []
-        if node_type == node_types['saved']:
+        if node_type == SAVED:
             return []
-        if node_type != node_types['nested']:
-            if node_type == node_types['deleted']:
+        if node_type != NESTED:
+            if node_type == DELETED:
                 statement = 'removed'
-            if node_type == node_types['added']:
+            if node_type == ADDED:
                 statement = (
                     f'added with value: '
                     f'{dump_values(ig.get_all_values(item))}'
                 )
-            if node_type == node_types['changed']:
+            if node_type == CHANGED:
                 statement = (
                     f'updated. From '
                     f'{dump_values(ig.get_init_value(item))} '
                     f'to {dump_values(ig.get_new_value(item))}'
                 )
             return (dump_values(path), statement)
-        elif node_type == node_types['nested']:
+        elif node_type == NESTED:
             return (
                 list(map(
                     lambda node: recourse(node, path),

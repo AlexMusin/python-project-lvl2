@@ -3,6 +3,7 @@ import yaml
 
 
 FORMAT_LIST = ['.json', '.yaml', '.yml']
+JSON = FORMAT_LIST[0]
 
 
 def validate_file_format(format):
@@ -15,7 +16,7 @@ def parse_file(text, format):
     Check file format
     Return parsed collection'''
     validate_file_format(format)
-    if format == 'json':
+    if format == JSON:
         parsed = json.loads(text)
     else:
         parsed = yaml.load(text, Loader=yaml.SafeLoader) or {}
