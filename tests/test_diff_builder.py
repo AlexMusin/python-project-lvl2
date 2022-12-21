@@ -13,4 +13,3 @@ def test_normal_case():
         dict2 = parse_file(text2, format2)
         diff = sort_diff(dict_diff(dict1, dict2))
         assert str(diff) == expected
-
