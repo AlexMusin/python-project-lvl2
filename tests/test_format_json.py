@@ -1,4 +1,5 @@
 from gendiff.diff_generator import generate_diff
+from gendiff.diff_sort import sort_diff
 import json
 
 
@@ -13,11 +14,3 @@ def test_normal_case():
         diff = sort_diff(json.loads(diff))
         expected = sort_diff(json.loads(expected))
         assert diff == expected
-
-
-def sort_diff(diff):
-    diff.sort(key=lambda k: k['name'])
-    for elem in diff:
-        if elem['node_type'] == 'nested':
-            sort_diff(elem['children'])
-    return diff

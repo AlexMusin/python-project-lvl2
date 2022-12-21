@@ -1,6 +1,7 @@
 from gendiff.diff_builder import dict_diff
 from gendiff.file_parser import parse_file
 from gendiff.file_reader import read_file
+from gendiff.diff_sort import sort_diff
 
 
 def test_normal_case():
@@ -10,5 +11,6 @@ def test_normal_case():
         text2, format2 = read_file('tests/fixtures/file2_smaller.json')
         dict1 = parse_file(text1, format1)
         dict2 = parse_file(text2, format2)
-        diff = dict_diff(dict1, dict2)
-        assert len(str(diff)) == len(expected)
+        diff = sort_diff(dict_diff(dict1, dict2))
+        assert str(diff) == expected
+
