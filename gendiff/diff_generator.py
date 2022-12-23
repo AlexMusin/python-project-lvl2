@@ -6,6 +6,7 @@ from gendiff.diff_out import diff_output
 
 DEFAULT_FORMAT = 'stylish'
 
+
 def generate_diff(first_file_path, second_file_path, format=DEFAULT_FORMAT):
     text1, format1 = read_file(first_file_path)
     text2, format2 = read_file(second_file_path)
