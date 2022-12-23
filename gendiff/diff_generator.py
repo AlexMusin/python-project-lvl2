@@ -4,7 +4,9 @@ from gendiff.file_parser import parse_file
 from gendiff.diff_out import diff_output
 
 
-def generate_diff(first_file_path, second_file_path, format='stylish'):
+DEFAULT_FORMAT = 'stylish'
+
+def generate_diff(first_file_path, second_file_path, format=DEFAULT_FORMAT):
     text1, format1 = read_file(first_file_path)
     text2, format2 = read_file(second_file_path)
     dict1 = parse_file(text1, format1)
