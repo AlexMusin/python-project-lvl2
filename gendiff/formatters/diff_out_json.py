@@ -1,5 +1,4 @@
 import json
-from gendiff import diff_inner_representation as ig
 
 
 def out(inp_diff):
