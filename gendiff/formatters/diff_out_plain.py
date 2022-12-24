@@ -7,50 +7,45 @@ SAVED = 'saved'
 DELETED = 'deleted'
 ADDED = 'added'
 CHANGED = 'changed'
+NAME = 'name'
 
 
 def out(inp_diff):
-    '''Build plain-style output'''
-    out_list = [
-        f'Property {elem[0]} was {elem[1]}'
-        for elem in prepare_list(inp_diff)
-    ]
-    return '\n'.join(out_list)
+    result_list = []
+
+    def recourse(elem, path):
+        sorted_elem_list = sorted(elem, key=lambda k: k[NAME])
+        for item in sorted_elem_list:
+            name = ig.get_name(item)
+            node_type = ig.get_node_type(item)
+            path_old = path
+            path = ('.'.join([path, name])).strip('.')
+            if node_type == NESTED:
+                recourse(ig.get_children(item), path)
+            elif node_type != SAVED:
+                if node_type == DELETED:
+                    statement = 'removed'
+                elif node_type == ADDED:
+                    statement = (
+                        f'added with value: '
+                        f'{dump_values(ig.get_all_values(item))}'
+                    )
+                elif node_type == CHANGED:
+                    statement = (
+                        f'updated. From '
+                        f'{dump_values(ig.get_init_value(item))} '
+                        f'to {dump_values(ig.get_new_value(item))}'
+                    )
+                formatted_node = make_formatted_node(path, statement)
+                result_list.append(formatted_node)
+            path = path_old
+    recourse(inp_diff, path='')
+    out_string = '\n'.join(result_list)
+    return out_string
 
 
-def prepare_list(inp_diff):
-    '''Make in-between list for difference output'''
-
-    def recourse(item, path):
-        node_type = ig.get_node_type(item)
-        name = ig.get_name(item)
-        path = ('.'.join([path, name])).strip('.')
-        statement = []
-        if node_type == SAVED:
-            return []
-        if node_type != NESTED:
-            if node_type == DELETED:
-                statement = 'removed'
-            if node_type == ADDED:
-                statement = (
-                    f'added with value: '
-                    f'{dump_values(ig.get_all_values(item))}'
-                )
-            if node_type == CHANGED:
-                statement = (
-                    f'updated. From '
-                    f'{dump_values(ig.get_init_value(item))} '
-                    f'to {dump_values(ig.get_new_value(item))}'
-                )
-            return (dump_values(path), statement)
-        elif node_type == NESTED:
-            return (
-                list(map(
-                    lambda node: recourse(node, path),
-                    ig.get_children(item)
-                ))
-            )
-    return sorted(flatten(list(map(lambda x: recourse(x, path=''), inp_diff))))
+def make_formatted_node(path, statement):
+    return f"Property '{path}' was {statement}"
 
 
 def dump_values(value):
@@ -61,16 +56,3 @@ def dump_values(value):
         return dump(value)
     else:
         return '[complex value]'
-
-
-def flatten(inp_list):
-    '''Flatten list'''
-    a = []
-
-    def recourse(item):
-        if not isinstance(item, list):
-            a.append(item)
-        else:
-            list(map(recourse, item))
-    recourse(inp_list)
-    return a

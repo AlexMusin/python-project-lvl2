@@ -2,12 +2,12 @@ import gendiff.diff_inner_representation as ig
 from gendiff.dumper import dump
 
 
-SINGLE_NODE_TYPE_DICT = {
+SIMPLE_NODE_TYPE_DICT = {
     'saved': ' ',
     'deleted': '-',
     'added': '+'
 }
-REPLACER = '    '
+INDENT = '    '
 NESTED = 'nested'
 SAVED = 'saved'
 DELETED = 'deleted'
@@ -16,82 +16,62 @@ CHANGED = 'changed'
 NAME = 'name'
 
 
-def out(inp_diff, extention='.json'):
+def out(inp_diff):
     '''Return stylish-formatted difference'''
-    a = ['{']
+    result_list = ['{']
 
     def recourse(elem, depth=0):
         sorted_elem = sorted(elem, key=lambda k: k[NAME])
         for item in sorted_elem:
             name = ig.get_name(item)
             node_type = ig.get_node_type(item)
-            if node_type in SINGLE_NODE_TYPE_DICT.keys():
-                operation = SINGLE_NODE_TYPE_DICT[node_type]
-                builded_value = single_value_build(
+            if node_type in SIMPLE_NODE_TYPE_DICT.keys():
+                operation = SIMPLE_NODE_TYPE_DICT[node_type]
+                formatted_node = make_formatted_node(
                     ig.get_all_values(item),
                     depth,
-                    REPLACER,
-                    extention,
-                )
-                a.append(make_string(
-                    REPLACER,
-                    depth,
+                    INDENT,
                     name,
-                    operation,
-                    builded_value,
+                    operation
                 )
-                )
+                result_list.append(formatted_node)
             elif node_type == CHANGED:
-                operation1 = SINGLE_NODE_TYPE_DICT[DELETED]
-                operation2 = SINGLE_NODE_TYPE_DICT[ADDED]
-                builded_init_value = single_value_build(
+                operation1 = SIMPLE_NODE_TYPE_DICT[DELETED]
+                operation2 = SIMPLE_NODE_TYPE_DICT[ADDED]
+                init_node = make_formatted_node(
                     ig.get_init_value(item),
                     depth,
-                    REPLACER,
-                    extention,
+                    INDENT,
+                    name,
+                    operation1
                 )
-                builded_new_value = single_value_build(
+                new_node = make_formatted_node(
                     ig.get_new_value(item),
                     depth,
-                    REPLACER,
-                    extention,
-                )
-                a.append(make_string(
-                    REPLACER,
-                    depth,
+                    INDENT,
                     name,
-                    operation1,
-                    builded_init_value,
+                    operation2
                 )
-                )
-                a.append(make_string(
-                    REPLACER,
-                    depth,
-                    name,
-                    operation2,
-                    builded_new_value,
-                )
-                )
+                formatted_node = init_node + '\n' + new_node
+                result_list.append(formatted_node)
             elif node_type == NESTED:
-                a.append(f"{REPLACER * depth}    {name}: {{")
                 depth += 1
+                result_list.append(f"{INDENT * depth}{name}: {{")
                 recourse(ig.get_children(item), depth)
-                a.append(f"{REPLACER * depth}}}")
+                result_list.append(f"{INDENT * depth}}}")
                 depth -= 1
     recourse(inp_diff)
-    a.append('}')
-    out_string = '\n'.join(a)
+    result_list.append('}')
+    out_string = '\n'.join(result_list)
     return out_string
 
 
-def single_value_build(inp_value, depth, REPLACER, extention):
-    '''Build output for single complex cases
-    i.e. when node_type is not nested and
-    at least one of the values is complex'''
+def build_value_string(depth, INDENT, inp_value):
+    '''Build output for single value'''
     out_list = []
     depth += 1
     if not isinstance(inp_value, dict):
-        out_list.append(f'{dump(inp_value, extention)}')
+        out_list.append(f'{dump(inp_value)}')
     else:
         out_list.append('{')
 
@@ -99,23 +79,39 @@ def single_value_build(inp_value, depth, REPLACER, extention):
             for item in sorted(elem.keys()):
                 if not isinstance(elem[item], dict):
                     out_list.append(
-                        f"{REPLACER * depth}    "
-                        f"{item}: {dump(elem[item], extention)}"
+                        f"{INDENT * depth}    "
+                        f"{item}: {dump(elem[item])}"
                     )
                 else:
-                    out_list.append(f"{REPLACER * depth}    {item}: {{")
+                    out_list.append(f"{INDENT * depth}    {item}: {{")
                     depth += 1
                     recourse(elem[item], depth)
-                    out_list.append(f"{REPLACER * depth}}}")
+                    out_list.append(f"{INDENT * depth}}}")
                     depth -= 1
         recourse(inp_value, depth)
-        out_list.append(f"{REPLACER * depth}}}")
+        out_list.append(f"{INDENT * depth}}}")
     return ('\n'.join(out_list))
 
 
-def make_string(REPLACER, depth, name, operation, value):
+def make_long_string(depth, INDENT, name, operation, value_string):
     return (
-        f"{REPLACER * depth}  {operation} "
+        f"{INDENT * depth}  {operation} "
         f"{name}: "
-        f"{value}"
+        f"{value_string}"
     )
+
+
+def make_formatted_node(inp_value, depth, INDENT, name, operation):
+    value_string = build_value_string(
+        depth,
+        INDENT,
+        inp_value,
+    )
+    formatted_node = make_long_string(
+        depth,
+        INDENT,
+        name,
+        operation,
+        value_string
+    )
+    return formatted_node
