@@ -66,6 +66,22 @@ def out(inp_diff):
     return out_string
 
 
+def make_formatted_node(inp_value, depth, INDENT, name, operation):
+    value_string = build_value_string(
+        depth,
+        INDENT,
+        inp_value,
+    )
+    formatted_node = make_long_string(
+        depth,
+        INDENT,
+        name,
+        operation,
+        value_string
+    )
+    return formatted_node
+
+
 def build_value_string(depth, INDENT, inp_value):
     '''Build output for single value'''
     out_list = []
@@ -99,19 +115,3 @@ def make_long_string(depth, INDENT, name, operation, value_string):
         f"{name}: "
         f"{value_string}"
     )
-
-
-def make_formatted_node(inp_value, depth, INDENT, name, operation):
-    value_string = build_value_string(
-        depth,
-        INDENT,
-        inp_value,
-    )
-    formatted_node = make_long_string(
-        depth,
-        INDENT,
-        name,
-        operation,
-        value_string
-    )
-    return formatted_node
